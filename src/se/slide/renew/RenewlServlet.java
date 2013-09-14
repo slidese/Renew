@@ -8,6 +8,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.cmd.Query;
 
 import se.slide.renew.entity.Property;
 import se.slide.renew.entity.Renew;
@@ -73,7 +74,13 @@ public class RenewlServlet extends HttpServlet {
             try {
                 existingKey = Long.parseLong(inputKey);
                 entity = ofy().load().type(Renew.class).id(existingKey).now();
-                //entity = ofy().load().type(Renew.class).filter("userId", userId).
+                /*
+                Query<Renew> q = ofy().load().type(Renew.class); //filter("userId", userId).
+                q.filter("userId", userId);
+                q.filter("id", e)
+                */
+                if (entity.userId == null || entity.userId.trim().length() < 1 || !entity.userId.equalsIgnoreCase(userId))
+                    entity = null;
             }
             catch (NumberFormatException e) {
                 //
@@ -125,7 +132,9 @@ public class RenewlServlet extends HttpServlet {
             entity.name = inputName;
             entity.url = inputUrl;
             entity.expires = expirationDate;
+            entity.checked = null;
             entity.comment = inputComment;
+            entity.userId = userId;
             
             // delete old props, this is pretty bad
             if (entity != null) {

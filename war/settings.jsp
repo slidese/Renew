@@ -48,7 +48,7 @@ response.setDateHeader("Expires", 0);
 		
 			<div class="form-group">
 				<div class="col-lg-offset-2 col-lg-10">
-					<label for="optionsReminder" class="control-label">Remind me before expiration</label>
+					<label for="optionsReminder" class="control-label">Before expiration remind me in</label>
 				  
 					<div class="radio">
 					  <label>

@@ -8,6 +8,7 @@ response.setDateHeader("Expires", 0);
 <%@ page import="se.slide.renew.entity.Renew" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="static com.googlecode.objectify.ObjectifyService.ofy" %>
+<%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 
@@ -54,40 +55,52 @@ response.setDateHeader("Expires", 0);
 		 		</tr-->
 		 		<%
 					//List<RenewObject> renewObjs = DatastoreHelper.getInstance().getRenewObjects();
-            
-            		List<Renew> listOfRenew = ofy().load().type(Renew.class).list();
+		 		
+			 		UserService userService = UserServiceFactory.getUserService();
+			 	    User user = userService.getCurrentUser();
+			 	    
+			 	    // Handle authentication
+			 	    if (user == null || !userService.isUserLoggedIn() || user.getUserId() == null) {
+			 	        request.getRequestDispatcher("index.jsp").forward(request, response);
+			 	    }
+			 	    else {
+				 	    
+				 	 	// Handle user object and settings for that user
+				 	    String userId = user.getUserId();
+	            
+	            		List<Renew> listOfRenew = ofy().load().type(Renew.class).filter("userId", userId).list(); //.list();
+	
+	            		for (Renew r : listOfRenew) {
+	            		    String adress = "";
+	            		    if (r.url != null && r.url.length() > 16)
+	            		        adress = r.url.substring(0, 16) + "...";
+	            		    else if (r.url != null)
+	            		        adress = r.url;
+	            		    
+	            		    String exp = "N/A";
+	            		    if (r.expires != null)
+	            		        exp = new SimpleDateFormat("yyyy-MM-dd").format(r.expires);
+	            		    
+	            		    String label = "success";
+	            		    String status = "OK";
+	            		    
+	            		    out.print("<tr>");
+							out.print("\t<td><a href=\"manage.jsp?key=" + r.id + "\">" + r.name + "</a></td>");
+							out.print("\t<td><span class=\"label label-" + label + "\">" + status + "</span></td>");
+							out.print("\t<td>" + exp + "</td>");
+							out.print("\t<td><a href=\"http://" + r.url + "\">" + adress + "</a></td>");
+	            		}
+	            
+	            		/*
+						for (RenewObject obj : renewObjs) {
+							out.print("<tr>");
+							out.print("\t<td><a href=\"manage.jsp?key=" + obj.key.getId() + "\">" + obj.name + "</a></td>");
+							out.print("\t<td>" + obj.expires + "</td>");
+							out.print("\t<td><a href=\"#\"><span class=\"glyphicon glyphicon-globe\"></span></a></td>");
+						}
+	            		*/
 
-            		for (Renew r : listOfRenew) {
-            		    String adress = "";
-            		    if (r.url != null && r.url.length() > 16)
-            		        adress = r.url.substring(0, 16) + "...";
-            		    else if (r.url != null)
-            		        adress = r.url;
-            		    
-            		    String exp = "N/A";
-            		    if (r.expires != null)
-            		        exp = new SimpleDateFormat("yyyy-MM-dd").format(r.expires);
-            		    
-            		    String label = "success";
-            		    String status = "OK";
-            		    
-            		    out.print("<tr>");
-						out.print("\t<td><a href=\"manage.jsp?key=" + r.id + "\">" + r.name + "</a></td>");
-						out.print("\t<td><span class=\"label label-" + label + "\">" + status + "</span></td>");
-						out.print("\t<td>" + exp + "</td>");
-						out.print("\t<td><a href=\"http://" + r.url + "\">" + adress + "</a></td>");
-            		}
-            
-            		/*
-					for (RenewObject obj : renewObjs) {
-						out.print("<tr>");
-						out.print("\t<td><a href=\"manage.jsp?key=" + obj.key.getId() + "\">" + obj.name + "</a></td>");
-						out.print("\t<td>" + obj.expires + "</td>");
-						out.print("\t<td><a href=\"#\"><span class=\"glyphicon glyphicon-globe\"></span></a></td>");
-					}
-            		*/
-
-					
+			 	    } // else
 				%>
 	 		</tbody>
 		</table>

@@ -1,6 +1,12 @@
 
 package se.slide.renew;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 import se.slide.renew.entity.Renew;
 
 import java.io.IOException;
@@ -8,8 +14,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -30,8 +34,18 @@ public class CheckServlet extends HttpServlet {
     static long one_month = one_day * 30; // 30...ish?
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        
+        UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();
+        
+        // Handle authentication
+        if (user == null || !userService.isUserLoggedIn() || user.getUserId() == null) {
+            return;
+        }
+        
+        String userId = user.getUserId();
 
-        List<Renew> listOfRenew = ofy().load().type(Renew.class).list();
+        List<Renew> listOfRenew = ofy().load().type(Renew.class).filter("userId", userId).list();
 
         StringBuilder builder = new StringBuilder();
 
