@@ -8,6 +8,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 import se.slide.renew.entity.Renew;
+import se.slide.renew.entity.Settings;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -29,10 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class CheckServlet extends HttpServlet {
 
-    static long one_day = 86400;
-    static long one_week = one_day * 7;
-    static long one_month = one_day * 30; // 30...ish?
-
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         
         UserService userService = UserServiceFactory.getUserService();
@@ -45,6 +42,7 @@ public class CheckServlet extends HttpServlet {
         
         String userId = user.getUserId();
 
+        Settings settings = ofy().load().type(Settings.class).filter("userId", userId).first().now();
         List<Renew> listOfRenew = ofy().load().type(Renew.class).filter("userId", userId).list();
 
         StringBuilder builder = new StringBuilder();
@@ -55,9 +53,9 @@ public class CheckServlet extends HttpServlet {
                 Date today = new Date();
                 long now = today.getTime();
                 long expires = r.expires.getTime();
-                long subtracted_expires = expires - (one_month * 2);
+                long subtractedExpiration = Utils.getSubtractedExpiration(r.expires, settings.reminderOption);
 
-                if (now > subtracted_expires) {
+                if (now > subtractedExpiration) {
                     Properties props = new Properties();
                     Session session = Session.getDefaultInstance(props, null);
 
