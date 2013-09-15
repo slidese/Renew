@@ -109,7 +109,9 @@
 
 		<p>&nbsp;</p>
 
-		<table class="table table-hover" id="propTable">
+		<div class="transparent-bg">
+
+		<table class="table table-striped" id="propTable">
 			<thead>
 				<tr>
 					<th style="width: 300px;">Property</th>
@@ -167,23 +169,27 @@
 			</tbody>
 
 		</table>
+		
+		</div>
 
 		<div class="clearfix">
-			<a class="pull-right" href="#" id="addProperty">Add property</a>
+			<a class="pull-right" href="#" style="color: #eee;" id="addProperty">Add property</a>
 		</div>
 
 		<p>&nbsp;</p>
 
-		<hr />
-
 		<button type="submit" class="btn btn-default pull-right"
 			id="submitButton">Save</button>
-		<a class="pull-left" href="/list.jsp">Go back</a>
+		<!-- a class="pull-left" href="/list.jsp" style="color: #eee;">Go back</a-->
 	</form>
 
 	<div id="response"></div>
 
 </div>
+
+<div class="clearfix"></div>
+
+<%@include file="inc_footer.jsp" %>
 
 </div>
 <!-- /container -->

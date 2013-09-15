@@ -1,9 +1,3 @@
-<%
-response.setHeader("Cache-Control", "no-cache");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
-%>
-
 <%@ page import="java.util.List" %>
 <%@ page import="se.slide.renew.entity.Renew" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
@@ -19,14 +13,6 @@ response.setDateHeader("Expires", 0);
 	<jsp:param name="active" value="home" />
 </jsp:include>
 
-
-
-      <!-- div class="jumbotron">
-        <h1>Jumbotron heading</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Sign up today</a></p>
-      </div-->
-
 	  <div class="transparent-bg">
 	  	<table class="table table-striped">
 	  		<thead>
@@ -38,24 +24,8 @@ response.setDateHeader("Expires", 0);
 		 		</tr>
 	 		</thead>
 	 		<tbody>
-		 		<!-- tr>
-		 			<td><a href="">Yesohmy</a></td>
-		 			<td>2013-09-10</td>
-		 			<td><a href="#"><span class="glyphicon glyphicon-globe"></span></a></td>
-		 		</tr>
-		 		<tr class="">
-		 			<td><a href="">Crystone</a></td>
-		 			<td>2014-01-10</td>
-		 			<td><a href="#"><span class="glyphicon glyphicon-globe"></span></a></td>
-		 		</tr>
-		 		<tr>
-		 			<td><a href="">intellus.se</a></td>
-		 			<td>2015-09-10</td>
-		 			<td><a href="#"><span class="glyphicon glyphicon-globe"></span></a></td>
-		 		</tr-->
+
 		 		<%
-					//List<RenewObject> renewObjs = DatastoreHelper.getInstance().getRenewObjects();
-		 		
 			 		UserService userService = UserServiceFactory.getUserService();
 			 	    User user = userService.getCurrentUser();
 			 	    
@@ -90,34 +60,18 @@ response.setDateHeader("Expires", 0);
 							out.print("\t<td>" + exp + "</td>");
 							out.print("\t<td><a href=\"http://" + r.url + "\">" + adress + "</a></td>");
 	            		}
-	            
-	            		/*
-						for (RenewObject obj : renewObjs) {
-							out.print("<tr>");
-							out.print("\t<td><a href=\"manage.jsp?key=" + obj.key.getId() + "\">" + obj.name + "</a></td>");
-							out.print("\t<td>" + obj.expires + "</td>");
-							out.print("\t<td><a href=\"#\"><span class=\"glyphicon glyphicon-globe\"></span></a></td>");
-						}
-	            		*/
 
 			 	    } // else
 				%>
 	 		</tbody>
 		</table>
-	  
-	 	
-		
-		
-		
 	  </div>
 	  
-	  <div>
+	  <div class="clearfix">
 	  	<a class="btn btn-default pull-right" href="manage.jsp">Add new</a>
 	  </div>
 
-      <!-- div class="footer">
-        <p>&copy; slide.se 2013</p>
-      </div-->
+	  <%@include file="inc_footer.jsp" %>
 
     </div> <!-- /container -->
 

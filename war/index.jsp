@@ -1,9 +1,3 @@
-<%
-response.setHeader("Cache-Control", "no-cache");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
-%>
-
 <%@ page import="java.util.List" %>
 <%@ page import="se.slide.renew.entity.Renew" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
@@ -62,40 +56,11 @@ response.setDateHeader("Expires", 0);
 				<img src="assets/img/Red-signin-Long-base-20dp.png" />
 			</a>
 		</div>
-		
-		
-		
-		
-		
 	  </div>
-
-      <!-- div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div-->
-
-      <!-- div class="footer">
-        <p>&copy; slide.se 2013</p>
-      </div-->
+      
+      <div class="clearfix"></div>
+      
+      <%@include file="inc_footer.jsp" %>
 
     </div> <!-- /container -->
 
