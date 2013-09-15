@@ -45,6 +45,9 @@ public class CheckServlet extends HttpServlet {
         Settings settings = ofy().load().type(Settings.class).filter("userId", userId).first().now();
         List<Renew> listOfRenew = ofy().load().type(Renew.class).filter("userId", userId).list();
 
+        if (settings == null)
+            settings = new Settings();
+        
         StringBuilder builder = new StringBuilder();
 
         for (Renew r : listOfRenew) {

@@ -43,6 +43,9 @@
 				 	    Settings settings = ofy().load().type(Settings.class).filter("userId", userId).first().now();
 	            		List<Renew> listOfRenew = ofy().load().type(Renew.class).filter("userId", userId).list(); //.list();
 	
+	            		if (settings == null)
+	            		    settings = new Settings(); // To get default
+	            		
 	            		for (Renew r : listOfRenew) {
 	            		    String adress = "";
 	            		    if (r.url != null && r.url.length() > 16)

@@ -71,7 +71,7 @@
           	if (request.getUserPrincipal() != null) {
           	  	out.println("<li class=\"" + home + "\"><a href=\"list.jsp\">Home</a></li>");
           		out.println("<li class=\"" + settings + "\"><a href=\"settings.jsp\">Settings</a></li>");
-          	    out.println("<li><a href=\"" + userService.createLogoutURL(thisURL) + "\">Logout</a></li>");
+          	    out.println("<li><a href=\"" + userService.createLogoutURL("/index.jsp") + "\">Logout</a></li>");
           	}
           
           %>
