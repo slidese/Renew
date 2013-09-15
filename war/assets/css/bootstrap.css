@@ -300,11 +300,17 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  slide-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 16px;
   line-height: 1.428571429;
-  color: #333333;
-  background-color: #ffffff;
+  slide-color: #333333;
+  color: #666;
+  slide-background-color: #ffffff;
+}
+
+th, .control-label {
+	color: #333;
 }
 
 input,
@@ -324,13 +330,14 @@ textarea {
 }
 
 a {
-  color: #428bca;
+  color: #777;
+  slide-color: #428bca;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #2a6496;
+  slide-color: #2a6496;
   text-decoration: underline;
 }
 
@@ -1416,12 +1423,12 @@ th {
   padding: 8px;
   line-height: 1.428571429;
   vertical-align: top;
-  border-top: 1px solid #dddddd;
+  slide-border-top: 1px solid #dddddd;
 }
 
 .table thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid #dddddd;
+  slide-border-bottom: 2px solid #dddddd;
 }
 
 .table caption + thead tr:first-child th,
@@ -1470,7 +1477,8 @@ th {
 
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-  background-color: #f9f9f9;
+  slide-background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .table-hover > tbody > tr:hover > td,
@@ -1990,7 +1998,8 @@ textarea.input-lg {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
-  font-size: 14px;
+  color: #777;
+  slide-font-size: 14px;
   font-weight: normal;
   line-height: 1.428571429;
   text-align: center;
@@ -2038,9 +2047,10 @@ fieldset[disabled] .btn {
 }
 
 .btn-default {
-  color: #333333;
-  background-color: #ffffff;
-  border-color: #cccccc;
+  slide-color: #333333;
+  slide-background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.9);
+  slide-border-color: #cccccc;
 }
 
 .btn-default:hover,
@@ -2050,7 +2060,7 @@ fieldset[disabled] .btn {
 .open .dropdown-toggle.btn-default {
   color: #333333;
   background-color: #ebebeb;
-  border-color: #adadad;
+  slide-border-color: #adadad;
 }
 
 .btn-default:active,
@@ -3813,7 +3823,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  slide-background-color: #eeeeee;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .nav > li.disabled > a {
@@ -3920,8 +3931,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  color: #ffffff;
-  background-color: #428bca;
+  color: #aaa;
+  slide-background-color: #428bca;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .nav-stacked > li {

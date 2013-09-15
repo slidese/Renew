@@ -1,3 +1,6 @@
+<%
+    		String active = request.getParameter("active");
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +13,7 @@
     <title>Renew</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="assets/css/pages.css" rel="stylesheet">
@@ -22,11 +25,20 @@
     <![endif]-->
     
     <script src="assets/js/jquery-1.10.2.min.js"></script>
+    
+    <link href='http://fonts.googleapis.com/css?family=Codystar|Fredericka+the+Great|Pacifico|Open+Sans' rel='stylesheet' type='text/css'>
+    
   </head>
 
   <body>
 
     <div class="container">
+    	
+    	<%
+            if (active != null && !active.equalsIgnoreCase("index")) {
+    	%>
+    
+    
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <!-- li class="active"><a href="#">Home</a></li-->
@@ -44,22 +56,20 @@
             
             
           
-            String active = request.getParameter("active");
+            
             String home = "";
             String settings = "";
             String manage = "";
             
-            if (active != null) {
-                if (active.equalsIgnoreCase("home"))
-                    home = "active";
-                else if (active.equalsIgnoreCase("settings"))
-                    settings = "active";
-                else if (active.equalsIgnoreCase("manage"))
-                    manage = "active";
-            }
+            if (active.equalsIgnoreCase("home"))
+                home = "active";
+            else if (active.equalsIgnoreCase("settings"))
+                settings = "active";
+            else if (active.equalsIgnoreCase("manage"))
+                manage = "active";
           
           	if (request.getUserPrincipal() != null) {
-          	  	out.println("<li class=\"" + home + "\"><a href=\"index.jsp\">Home</a></li>");
+          	  	out.println("<li class=\"" + home + "\"><a href=\"list.jsp\">Home</a></li>");
           		out.println("<li class=\"" + settings + "\"><a href=\"settings.jsp\">Settings</a></li>");
           	    out.println("<li><a href=\"" + userService.createLogoutURL(thisURL) + "\">Logout</a></li>");
           	}
@@ -68,5 +78,9 @@
           
           
         </ul>
-        <h3 class="text-muted">Renew</h3>
+        <span class="title title-text-small"><a href="/index.jsp">Renew</a></span>
       </div>
+      
+      <%
+            }
+      %>

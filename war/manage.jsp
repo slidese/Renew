@@ -178,7 +178,7 @@
 
 		<button type="submit" class="btn btn-default pull-right"
 			id="submitButton">Save</button>
-		<a class="pull-left" href="/">Go back</a>
+		<a class="pull-left" href="/list.jsp">Go back</a>
 	</form>
 
 	<div id="response"></div>
@@ -300,7 +300,7 @@
                 dataType : "json", // set this to json to automatically parse it in the success/error functions
                 success : function(data) {
                     if (data.status == "OK") {
-                        window.location = "/";
+                        window.location = "/list.jsp";
 
                     } else {
                         $.each(data.parametersOk, function(index, value) {

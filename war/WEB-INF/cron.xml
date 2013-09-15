@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/check</url>
+		<description>Check for expirations</description>
+		<schedule>every day 18:00</schedule>
+	</cron>
+	<!-- cron>
+		<url>/report</url>
+		<description>Mail out a monthly report</description>
+		<schedule>every monday 08:30</schedule>
+	</cron-->
+</cronentries>

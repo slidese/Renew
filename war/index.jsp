@@ -16,7 +16,7 @@ response.setDateHeader("Expires", 0);
 <%@ page import="java.util.Date" %>
 
 <jsp:include page="inc_header.jsp">
-	<jsp:param name="active" value="home" />
+	<jsp:param name="active" value="index" />
 </jsp:include>
 
 
@@ -27,87 +27,45 @@ response.setDateHeader("Expires", 0);
         <p><a class="btn btn-lg btn-success" href="#">Sign up today</a></p>
       </div-->
 
-	  <div>
-	  	<table class="table table-striped table-hover">
-	  		<thead>
-		 		<tr>
-		 			<th>Object</th>
-		 			<th>Status</th>
-					<th>Expires</th>
-		 			<th>Website</th>
-		 		</tr>
-	 		</thead>
-	 		<tbody>
-		 		<!-- tr>
-		 			<td><a href="">Yesohmy</a></td>
-		 			<td>2013-09-10</td>
-		 			<td><a href="#"><span class="glyphicon glyphicon-globe"></span></a></td>
-		 		</tr>
-		 		<tr class="">
-		 			<td><a href="">Crystone</a></td>
-		 			<td>2014-01-10</td>
-		 			<td><a href="#"><span class="glyphicon glyphicon-globe"></span></a></td>
-		 		</tr>
-		 		<tr>
-		 			<td><a href="">intellus.se</a></td>
-		 			<td>2015-09-10</td>
-		 			<td><a href="#"><span class="glyphicon glyphicon-globe"></span></a></td>
-		 		</tr-->
-		 		<%
-					//List<RenewObject> renewObjs = DatastoreHelper.getInstance().getRenewObjects();
-		 		
-			 		UserService userService = UserServiceFactory.getUserService();
-			 	    User user = userService.getCurrentUser();
-			 	    
-			 	    // Handle authentication
-			 	    if (user == null || !userService.isUserLoggedIn() || user.getUserId() == null) {
-			 	        request.getRequestDispatcher("index.jsp").forward(request, response);
-			 	    }
-			 	    else {
-				 	    
-				 	 	// Handle user object and settings for that user
-				 	    String userId = user.getUserId();
-	            
-	            		List<Renew> listOfRenew = ofy().load().type(Renew.class).filter("userId", userId).list(); //.list();
-	
-	            		for (Renew r : listOfRenew) {
-	            		    String adress = "";
-	            		    if (r.url != null && r.url.length() > 16)
-	            		        adress = r.url.substring(0, 16) + "...";
-	            		    else if (r.url != null)
-	            		        adress = r.url;
-	            		    
-	            		    String exp = "N/A";
-	            		    if (r.expires != null)
-	            		        exp = new SimpleDateFormat("yyyy-MM-dd").format(r.expires);
-	            		    
-	            		    String label = "success";
-	            		    String status = "OK";
-	            		    
-	            		    out.print("<tr>");
-							out.print("\t<td><a href=\"manage.jsp?key=" + r.id + "\">" + r.name + "</a></td>");
-							out.print("\t<td><span class=\"label label-" + label + "\">" + status + "</span></td>");
-							out.print("\t<td>" + exp + "</td>");
-							out.print("\t<td><a href=\"http://" + r.url + "\">" + adress + "</a></td>");
-	            		}
-	            
-	            		/*
-						for (RenewObject obj : renewObjs) {
-							out.print("<tr>");
-							out.print("\t<td><a href=\"manage.jsp?key=" + obj.key.getId() + "\">" + obj.name + "</a></td>");
-							out.print("\t<td>" + obj.expires + "</td>");
-							out.print("\t<td><a href=\"#\"><span class=\"glyphicon glyphicon-globe\"></span></a></td>");
-						}
-	            		*/
+	  <div style="margin-top: 160px;"></div>
 
-			 	    } // else
-				%>
-	 		</tbody>
-		</table>
-	  
-	 	
+	  <div class="transparent-bg">
 		
-		<a class="btn btn-default pull-right" href="manage.jsp">Add new</a>
+		
+		
+		<div class="title title-text">Renew</div>
+		
+		<hr class="title-hr" />
+		
+		<div class="title-content" >
+			<p>
+				Welcome to the simple web app that will help you to renew your stuff. What stuff? Any stuff you want.
+			</p>
+			<p>
+				It's simple, follow these steps:
+			</p>
+			<ol>
+				<li>Create your stuff</li>
+				<li>Chose when to be reminded</li>
+				<li>Done!</li>
+			</ol>
+			<p>
+				Renew will now send you and email when the expiration date is coming up. Please use your Google account to login and you're on your way!
+			</p>
+			<p>
+				
+			</p>
+		</div>
+		
+		<div style="text-align: center; padding-bottom: 20px;">
+			<a href="/list.jsp">
+				<img src="assets/img/Red-signin-Long-base-20dp.png" />
+			</a>
+		</div>
+		
+		
+		
+		
 		
 	  </div>
 

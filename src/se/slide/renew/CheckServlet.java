@@ -61,15 +61,30 @@ public class CheckServlet extends HttpServlet {
                     Properties props = new Properties();
                     Session session = Session.getDefaultInstance(props, null);
 
-                    String msgBody = "A new Renew was created.";
+                    StringBuilder msgBody = new StringBuilder();
+                    msgBody.append("Hi ");
+                    msgBody.append(user.getNickname());
+                    msgBody.append(",");
+                    msgBody.append("\r\n");
+                    msgBody.append("\r\n");
+                    msgBody.append("Your ");
+                    msgBody.append(r.name);
+                    msgBody.append(" will expire on ");
+                    msgBody.append(r.expires);
+                    msgBody.append(".");
+                    msgBody.append("\r\n");
+                    msgBody.append("\r\n");
+                    msgBody.append("\r\n");
+                    msgBody.append("Have a good day,");
+                    msgBody.append("\r\n");
+                    msgBody.append("Your friends at Renew");
 
                     try {
                         Message msg = new MimeMessage(session);
-                        msg.setFrom(new InternetAddress("www.slide.se@gmail.com", "Renew Admin"));
-                        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-                                "mike@slide.se", "Mr Mike"));
-                        msg.setSubject("Your Renew object has been created.");
-                        msg.setText(msgBody);
+                        msg.setFrom(new InternetAddress("www.slide.se@gmail.com", "Renew"));
+                        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail(), user.getNickname()));
+                        msg.setSubject("Renew notification for: " + r.name);
+                        msg.setText(msgBody.toString());
                         Transport.send(msg);
                         
                         // set the date when we sent the email

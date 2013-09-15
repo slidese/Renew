@@ -42,12 +42,14 @@ response.setDateHeader("Expires", 0);
         <p><a class="btn btn-lg btn-success" href="#">Sign up today</a></p>
       </div-->
 
-	  <div>
+	  <form class="form-horizontal" role="form" id="settingsForm">
+
+	  <div class="transparent-bg form-padding">
 	  	
-		<form class="form-horizontal" role="form" id="settingsForm">
+		
 		
 			<div class="form-group">
-				<div class="col-lg-offset-2 col-lg-10">
+				<div class="col-lg-10">
 					<label for="optionsReminder" class="control-label">Before expiration remind me in</label>
 				  
 					<div class="radio">
@@ -78,7 +80,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 			  
 			  <div class="form-group">
-			    <div class="col-lg-offset-2 col-lg-10">
+			    <div class="col-lg-10">
 			    	<label for="monthlySummary" class="control-label">One more thing...</label>
 			    	
 			      <div class="checkbox">
@@ -89,18 +91,23 @@ response.setDateHeader("Expires", 0);
 			    </div>
 			  </div>
 			  
-			  <div style="padding-top: 40px;"></div>
 			  
+		
+	  </div>
+	  
+	  <div>
+	  	<div style="margin-top: 20px;"></div>
+	  	
+	  	</div>
+	  
 			  <div class="form-group">
-			    <div class="col-lg-offset-2 col-lg-10">
+			    <div style="width: 100%; padding-right: 15px;">
 			      <button type="submit" id="submitButton" class="btn btn-default pull-right">Save</button>
 			    </div>
 			  </div>
-		</form>	  
-	 	
-		
-		
 	  </div>
+	  
+	  </form>	 
 
       <!-- div class="row marketing">
         <div class="col-lg-6">
@@ -151,7 +158,7 @@ response.setDateHeader("Expires", 0);
                 dataType : "json", // set this to json to automatically parse it in the success/error functions
                 success : function(data) {
                     if (data.status == "OK") {
-                        window.location = "/";
+                        window.location = "/list.jsp";
 
                     } else {
                         $.each(data.parametersOk, function(index, value) {
